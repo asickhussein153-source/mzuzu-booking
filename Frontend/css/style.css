@@ -1,0 +1,448 @@
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Arial, sans-serif; }
+body { background:#f2f4f3; color:#222; line-height:1.6; }
+header { background:#0b4d2e; color:white; padding:18px 20px; display:flex; align-items:center; gap:16px; }
+header img { width:70px; height:70px; object-fit:contain; background:white; border-radius:50%; padding:5px; }
+header h1, header h2 { font-size:24px; line-height:1.2; }
+header p { font-size:14px; opacity:0.85; }
+nav { background:white; padding:14px 20px; display:flex; gap:24px; box-shadow:0 2px 8px rgba(0,0,0,0.08); position:sticky; top:0; }
+nav a { color:#0b4d2e; text-decoration:none; font-weight:700; font-size:15px; }
+nav a:hover { color:#eab308; }
+main, section { max-width:900px; margin:24px auto; padding:0 16px; }
+h1 { font-size:28px; margin:18px 0 8px; color:#0b4d2e; }
+p { margin-bottom:14px; color:#444; }
+form { background:white; padding:28px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); max-width:520px; margin:20px auto; }
+label { display:block; font-weight:600; margin:14px 0 6px; font-size:14px; }
+input, select, textarea { width:100%; padding:12px; border:1.5px solid #ddd; border-radius:8px; font-size:15px; outline:none; }
+input:focus { border-color:#0b4d2e; }
+button, input[type="submit"] { width:100%; background:#0b4d2e; color:white; border:none; padding:13px; border-radius:8px; font-size:16px; font-weight:700; margin-top:18px; cursor:pointer; }
+button:hover, input[type="submit"]:hover { background:#0e6b3f; }
+a { color:#0b4d2e; }
+footer { background:#0b4d2e; color:white; text-align:center; padding:18px; margin-top:40px; font-size:14px; }
+img { max-width:100%; border-radius:10px; }
+header p, header h2, header span { color:white !important; } header { align-items:center; } nav { justify-content:center; }
+nav { justify-content:center; flex-wrap:wrap; gap:10px; padding:12px; }
+nav a { background:#eef6f0; color:#0b4d2e; padding:10px 18px; border-radius:30px; border:1.5px solid #0b4d2e; font-size:15px; display:inline-block; }
+nav a:hover { background:#0b4d2e; color:white; }
+nav a:first-child { background:#0b4d2e; color:white; }
+h1, h2, h3 { color:white !important; }
+section h1, section h2 { color:#0b4d2e !important; }
+main h1 { color:#0b4d2e !important; }
+nav + *, header + * { padding-top:12px; }
+h1, h2 { overflow:visible !important; line-height:1.3 !important; }
+section:first-of-type h1, section:first-of-type h2 { color:#eab308 !important; }
+main { padding-top:20px !important; }
+
+/* =====================================
+   MZUZU UNIVERSITY BRANDING
+===================================== */
+
+header.university-header {
+    background: #ffffff !important;
+    color: #222 !important;
+    padding: 18px 4% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-bottom: 4px solid darkgreen;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+/* LOGO AND UNIVERSITY NAME */
+
+.university-brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.university-header img.university-logo {
+    width: 125px !important;
+    height: 125px !important;
+    object-fit: contain;
+    border-radius: 0;
+}
+
+.university-info h2 {
+    color: darkgreen !important;
+    font-size: 25px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.university-info p {
+    color: #555 !important;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* NAVIGATION */
+
+.university-header nav.navbar {
+    background: transparent !important;
+    padding: 0 !important;
+    display: block;
+}
+
+.university-header .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.university-header .nav-links a {
+    background: #edf5ef !important;
+    color: darkgreen !important;
+    padding: 12px 21px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.university-header .nav-links a:hover {
+    background: darkgreen !important;
+    color: white !important;
+    transform: translateY(-3px);
+}
+
+/* MOBILE DESIGN */
+
+@media (max-width: 700px) {
+
+    header.university-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 12px !important;
+    }
+
+    .university-brand {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .university-header img.university-logo {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .university-info h2 {
+        font-size: 22px;
+    }
+
+    .university-header .nav-links {
+        gap: 9px;
+    }
+
+    .university-header .nav-links a {
+        padding: 11px 16px;
+        font-size: 13px;
+    }
+}
+
+
+
+/* =====================================
+   FINAL UNIVERSITY DESIGN CORRECTIONS
+===================================== */
+
+/* 1. DARK GREEN UNIVERSITY HEADER */
+
+body header.university-header {
+    background: #07552d !important;
+    color: white !important;
+    padding: 22px 4% !important;
+    border-bottom: 5px solid #d4a72c;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.university-brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.university-header img.university-logo {
+    width: 125px !important;
+    height: 125px !important;
+    object-fit: contain;
+}
+
+.university-header .university-info h2 {
+    color: white !important;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.university-header .university-info p {
+    color: #e5eee8 !important;
+    font-size: 14px;
+}
+
+/* 2. NAVIGATION BUTTONS */
+
+.university-header nav.navbar {
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+.university-header .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.university-header .nav-links a {
+    background: white !important;
+    color: #07552d !important;
+    border: 2px solid white;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.university-header .nav-links a:hover {
+    background: #d4a72c !important;
+    color: #073c23 !important;
+}
+
+/* 3. WELCOME SECTION */
+
+.welcome-text {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+body .welcome-text h2 {
+    color: #07552d !important;
+    font-size: 30px;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.welcome-text p {
+    color: #444 !important;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* 4. HERO SECTION */
+
+body .hero h1 {
+    color: #07552d !important;
+    font-size: 34px;
+    line-height: 1.4;
+}
+
+.hero p {
+    color: #444 !important;
+    line-height: 1.7;
+}
+
+/* 5. PROFESSIONAL FOOTER */
+
+body footer {
+    background: #07552d !important;
+    color: white !important;
+    text-align: center;
+    padding: 35px 15px !important;
+    margin-top: 45px;
+    min-height: 110px;
+}
+
+body footer p,
+body footer span {
+    color: white !important;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* 6. MOBILE RESPONSIVENESS */
+
+@media (max-width: 700px) {
+
+    body header.university-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 12px !important;
+    }
+
+    .university-brand {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .university-header img.university-logo {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .university-header .university-info h2 {
+        font-size: 23px;
+    }
+
+    .university-header .nav-links {
+        gap: 9px;
+    }
+
+    .university-header .nav-links a {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    body .welcome-text h2 {
+        font-size: 25px;
+    }
+
+    .welcome-text p {
+        font-size: 16px;
+    }
+
+    body .hero h1 {
+        font-size: 28px;
+    }
+}
+
+/* CAMPUS IMAGE BLENDED INTO PAGE */
+
+.university-image {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+}
+
+.university-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 65%,
+        transparent 100%
+    );
+
+    mask-image: linear-gradient(
+        to bottom,
+        black 65%,
+        transparent 100%
+    );
+}
+
+/* Remove the gap around the image */
+.university-image + .welcome-text {
+    margin-top: -30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* FEATURE SECTION */
+
+.features {
+    padding: 45px 20px;
+    text-align: center;
+}
+
+.features h2 {
+    color: #07552d !important;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.feature-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.feature-card {
+    background: white;
+    padding: 28px 20px;
+    border-radius: 14px;
+    border-bottom: 4px solid darkgreen;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.13);
+}
+
+.feature-card h3 {
+    color: #07552d;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #555;
+    line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+    .feature-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* UNIVERSITY HEADER WITH TRANSPARENT PHOTO */
+
+.university-header {
+    position: relative;
+    background:
+        linear-gradient(
+            rgba(0, 65, 30, 0.82),
+            rgba(0, 65, 30, 0.88)
+)
+Url("Mzuzu/Frontend/images/mzuni.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* UNIVERSITY LOGO */
+
+.university-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.university-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+/* UNIVERSITY NAME */
+
+.university-info h2 {
+    color: white !important;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.university-info p {
+    color: white;
+    font-size: 15px;
+    opacity: 0.9;
+}

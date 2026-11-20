@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mzuzu University Room Booking</title>
+
+    <link rel="stylesheet" 
+      href="css/style.css">
+
+</head>
+
+<body>
+
+
+<header class="university-header">
+
+    <div class="university-brand">
+
+        <img src="images/Mzuni-logo.jpg"
+             alt="Mzuzu University Logo"
+             class="university-logo">
+
+        <div class="university-info">
+            <h2>Mzuzu University</h2>
+            <p>Room Booking Management System</p>
+        </div>
+
+    </div>
+
+    <nav class="navbar">
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </div>
+
+    </nav>
+
+</header>
+
+  
+    <section class="university-image">
+
+    <img src="images/mzuni.jpg"
+         alt="Mzuzu University Campus">
+
+</section>
+
+<div class="welcome-text">
+
+    <h2>Welcome to Mzuzu University</h2>
+
+    <p>
+        Discover our university facilities and
+        conveniently request rooms for meetings,
+        seminars, workshops and other academic
+        activities.
+    </p>
+
+</div>
+
+
+
+    <section class="hero">
+
+        <h1>Book University Rooms Online</h1>
+
+        <p>
+            Request university rooms for meetings,
+            seminars, workshops and other events
+            without physically visiting the Porter's Lodge.
+        </p>
+
+        <a href="rooms.html" class="btn">
+            Explore Available Rooms
+        </a>
+
+    </section>
+
+
+
+<section class="features">
+
+    <h2>Why Use Our Booking System?</h2>
+
+    <div class="feature-container">
+
+        <div class="feature-card">
+            <h3>Easy Booking</h3>
+            <p>
+                Request university rooms conveniently
+                without visiting the Porter's Lodge.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Available Facilities</h3>
+            <p>
+                Explore different university rooms
+                and their available capacities.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Convenient Requests</h3>
+            <p>
+                Submit your event details and
+                booking requests online.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+    <section class="about">
+
+        <h2>About Our System</h2>
+
+        <p>
+            Mzuzu University Online Room Booking System
+            provides students with a convenient way to
+            request rooms for university events.
+        </p>
+
+    </section>
+
+    <footer>
+        <p>
+            &copy; 2026 Mzuzu University Room Booking System
+        </p>
+    </footer>
+
+</body>
+</html>

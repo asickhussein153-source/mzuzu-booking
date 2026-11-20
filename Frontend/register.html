@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration | Mzuzu University</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- University Header -->
+    <header class="university-header">
+
+        <img src="images/Mzuni-logo.jpg"
+             alt="Mzuzu University Logo"
+             class="university-logo">
+
+        <div>
+            <h2>Mzuzu University</h2>
+            <p>Room Booking Management System</p>
+        </div>
+
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="rooms.html">Rooms</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+confirmPassword 
+
+    <!-- Registration Form -->
+    <main class="register-container">
+
+        <div class="register-box">
+
+            <h1>Student Registration</h1>
+
+            <p>Create an account to use the booking system.</p>
+
+            <form action="#" method="POST">
+
+                <label for="fullname">Full Name</label>
+                <input type="text"
+                       id="fullname"
+                       name="name"
+                       placeholder="Enter your full name"
+                       required>
+
+                <label for="studentID">Registration Number</label>
+                <input type="text"
+                       id="studentID"
+                       name="studentID"
+                       placeholder="Enter your student number"
+                       required>
+
+                <label for="email">Email Address</label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="Enter your email"
+                       required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel"
+                       id="phone"
+                       name="phone"
+                       placeholder="Enter your phone number"
+                       required>
+
+                <label for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Create a password"
+                       required>
+
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password"
+                       id="confirmPassword"
+                       name="confirmPassword"
+                       placeholder="Confirm your password"
+
+                       required>
+<span id="matchMsg" style="margin-left:8px; font-weight:bold;"></span>
+
+                <button type="submit">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p>
+                Already have an account?
+                <a href="login.html">Login here</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Mzuzu University. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
+
+</body>
+<script>
+
+const passInput = document.getElementById('password');
+const confirmInput = document.getElementById('confirmPassword');
+const msg = document.getElementById('matchMsg');
+function checkMatch(){
+if(!confirmInput.value){msg.textContent='';return;}
+if(passInput.value===confirmInput.value){msg.textContent='Match';msg.style.color='green';}else{msg.textContent='Not match';msg.style.color='red';}
+}
+confirmInput.addEventListener('input',checkMatch);
+passInput.addEventListener('input',checkMatch);
+document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
+
+  if (data.password !== data.confirmPassword) {
+    alert('Passwords do not match!');
+    return;
+  }
+delete data.confirmPassword;
+  const res = await fetch('/api/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  const result = await res.json();
+  alert(result.message);
+  if (res.ok) window.location.href = 'login.html';
+});
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Bookings - Mzuzu University</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:sans-serif;background:#eef2f5;margin:0;padding:12px}
+.card{background:#0b3d66;color:#fff;padding:18px;border-radius:16px}
+.card a{color:#fff}
+.box{background:#fff;padding:16px;border-radius:14px;margin-top:14px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;font-size:16px;margin-top:8px}
+button{width:100%;padding:12px;border:0;border-radius:20px;background:#0b3d66;color:#fff;font-size:16px;margin-top:10px}
+.badge{padding:5px 12px;border-radius:20px;font-size:14px;font-weight:700}
+.approved{background:#dcfce7;color:#166534}
+.rejected{background:#fee2e2;color:#991b1b}
+.pending{background:#fef9c3;color:#854d0e}
+.reason{background:#fef2f2;border-left:4px solid #dc2626;padding:10px;border-radius:8px;margin-top:10px}
+.approved-box{background:#f0fdf4;border-left:4px solid #16a34a;padding:10px;border-radius:8px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="card">
+<h2 style="margin:0">📋 My Bookings</h2>
+<p>Check if your booking is Approved or Rejected</p>
+<a href="/">← Back to Home</a>
+</div>
+<div class="box">
+<b>Enter your Email or Phone</b>
+<input id="search" placeholder="e.g. asickhussein153@gmail.com or 0990737842">
+<button onclick="check()">Check My Bookings</button>
+<p id="msg"></p>
+</div>
+<div id="list"></div>
+<script>
+async function check(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  if(!q){ alert('Please enter your email or phone'); return; }
+  const res = await fetch('http://localhost:3000/api/bookings');
+  const all = await res.json();
+  const mine = all.filter(b => (b.email||'').toLowerCase()===q || (b.phone||'')===q || (b.fullName||'').toLowerCase()===q);
+  if(!mine.length){ document.getElementById('list').innerHTML='<div class="box">No booking found for this email/phone.</div>'; return; }
+  document.getElementById('list').innerHTML = mine.map(b=>{
+    const status = b.status||'Pending';
+    let badgeClass = status==='Approved'?'approved':status==='Rejected'?'rejected':'pending';
+    let feedback = '';
+    const rReason = b.rejectionReason || b.reason || '';
+    if(status==='Rejected' && rReason){
+      feedback = `<div class="reason"><b>❌ Rejected Reason from Admin:</b><br>${rReason}</div>`;
+    } else if(status==='Approved'){
+      feedback = `<div class="approved-box"><b>✅ Congratulations! Your booking is Approved.</b><br>Please come to the venue on time with your student ID.</div>`;
+    } else {
+      feedback = `<div><b>⏳ Still Pending.</b><br>Admin has not responded yet. Please check again later.</div>`;
+    }
+    return `<div class="box">
+      <b>${b.room||b.roomType||'Room'}</b> - ${b.hostel||''} ${b.block||''}<br>
+      Date: ${(b.date||b.createdAt||'').toString().slice(0,10)}<br><br>
+      Status: <span class="badge ${badgeClass}">${status}</span>
+      ${feedback}
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

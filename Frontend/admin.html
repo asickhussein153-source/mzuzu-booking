@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin - Booking Requests</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:sans-serif;background:#eef2f5;margin:0;padding:12px}
+.card{background:#0b3d66;color:#fff;padding:18px;border-radius:16px}
+.card a{color:#fff}
+.top{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.top button,.top select{padding:10px 14px;border-radius:20px;border:1px solid #ccc;background:#fff;font-size:15px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}
+th,td{padding:12px;text-align:left;border-bottom:1px solid #eee}
+.approve{background:#16a34a;color:#fff;border:0;padding:9px 14px;border-radius:20px;cursor:pointer}
+.reject{background:#dc2626;color:#fff;border:0;padding:9px 14px;border-radius:20px;cursor:pointer}
+.del{background:#111;color:#fff;border:0;padding:9px 14px;border-radius:20px;cursor:pointer}
+.badge{padding:4px 10px;border-radius:20px;font-size:13px;background:#eee}
+.reject-box{display:none;background:#fff1f1;border:1px solid #fca5a5;border-radius:12px;padding:10px;margin-top:10px}
+.reject-box textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #ccc;font-size:15px;min-height:60px}
+.reject-box button{margin-top:8px}
+.cancel{background:#eee;border:0;padding:9px 14px;border-radius:20px;cursor:pointer}
+.reason{background:#fef2f2;border-left:4px solid #dc2626;padding:8px 10px;border-radius:8px;margin-top:8px;font-size:14px}
+@media(max-width:700px){
+table,thead,tbody,tr,th,td{display:block;width:100%}
+thead{display:none}
+tr{background:#fff;border-radius:14px;margin-bottom:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+td{border:0;padding:6px 0}
+td::before{content:attr(data-label);font-weight:700;display:block;font-size:12px;color:#666;text-transform:uppercase}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.actions button{flex:1;margin:0}
+}
+</style>
+</head>
+<body><script>if(!localStorage.getItem("token") || localStorage.getItem("role")!=="admin"){alert("Admins only - Please login as admin");window.location.href="login.html";}</script>
+<div class="card">
+<h2 style="margin:0">🏫 Admin - Booking Requests</h2>
+<p>Manage student room bookings - Mzuzu University</p>
+<a href="/">← Back to Home</a>
+</div>
+<div class="top">
+<button onclick="loadBookings()">🔄 Refresh</button>
+<select id="filter" onchange="loadBookings()">
+<option>All Status</option>
+<option>Pending</option>
+<option>Approved</option>
+<option>Rejected</option>
+</select>
+</div>
+<p id="empty" style="display:none">No bookings found.</p>
+<table>
+<thead><tr><th>STUDENT</th><th>ROOM / DETAILS</th><th>DATE</th><th>STATUS</th><th>ACTION</th></tr></thead>
+<tbody id="list"></tbody>
+</table>
+<p id="msg"></p>
+<script>
+let allBookings = [];
+async function loadBookings(){
+  try{
+    const res = await fetch('http://localhost:3000/api/bookings');
+    allBookings = await res.json();
+  }catch(e){ allBookings = []; }
+  const filter = document.getElementById('filter').value;
+  const filtered = (filter==='All Status'||filter==='All'||filter==='') ? allBookings : allBookings.filter(b=>b.status===filter);
+  document.getElementById('empty').style.display = filtered.length ? 'none':'block';
+  document.getElementById('list').innerHTML = filtered.map(b=>{
+    const id = b._id||b.id;
+    const reasonHtml = (b.status==='Rejected' && b.rejectionReason) ? `<div class="reason"><b>Rejection Reason:</b><br>${b.rejectionReason}</div>` : '';
+    return `
+    <tr>
+      <td data-label="Student"><b>${b.fullName||b.name||'Student'}</b><br>${b.email||''}<br>${b.phone||''}</td>
+      <td data-label="Room / Details">${b.room||b.roomType||''}<br>${b.hostel||''} ${b.block||''}</td>
+      <td data-label="Date">${(b.date||b.createdAt||'').toString().slice(0,10)}</td>
+      <td data-label="Status"><span class="badge">${b.status||'Pending'}</span>${reasonHtml}</td>
+      <td data-label="Action"><div class="actions">
+        <button class="approve" onclick="approveBooking('${id}')">Approve</button>
+        <button class="reject" onclick="showReject('${id}')">Reject</button>
+        <button class="del" onclick="delBooking('${id}')">Delete</button>
+      </div>
+      <div class="reject-box" id="box-${id}">
+        <b>Why are you rejecting?</b>
+        <textarea id="rejectionReason-${id}" placeholder="e.g. Room is already fully booked for that date..."></textarea>
+        <div style="display:flex;gap:8px">
+          <button class="reject" style="flex:1" onclick="confirmReject('${id}')">Confirm Reject</button>
+          <button class="cancel" style="flex:1" onclick="hideReject('${id}')">Cancel</button>
+        </div>
+      </div>
+      </td>
+    </tr>`}).join('');
+}
+function showReject(id){
+  document.querySelectorAll('.reject-box').forEach(el=>el.style.display='none');
+  document.getElementById('box-'+id).style.display='block';
+}
+function hideReject(id){ document.getElementById('box-'+id).style.display='none'; }
+async function approveBooking(id){
+  const res = await fetch('http://localhost:3000/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Approved'})});
+  const d = await res.json().catch(()=>({}));
+  document.getElementById('msg').textContent = d.message||'Booking Approved';
+  loadBookings();
+}
+async function confirmReject(id){
+  const reason = document.getElementById('rejectionReason-'+id).value.trim();
+  if(!reason){ alert('Please write the reason for rejection'); return; }
+  const res = await fetch('http://localhost:3000/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Rejected',reason})});
+  const d = await res.json().catch(()=>({}));
+  document.getElementById('msg').textContent = d.message||'Booking Rejected';
+  loadBookings();
+}
+async function delBooking(id){
+  if(!confirm('Delete this booking?')) return;
+  await fetch('http://localhost:3000/api/bookings/'+id,{method:'DELETE'});
+  loadBookings();
+}
+loadBookings();
+</script>
+</body>
+</html>
