@@ -16,7 +16,7 @@ async function submitBooking(e) {
 
     try {
 
-        const res = await fetch('http://localhost:3000/book-room', {
+        const res = await fetch('/book-room', {
             method: 'POST',
 
             headers: {

@@ -9,7 +9,7 @@ async function submitBooking() {
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   try {
-    const res = await fetch('http://localhost:3000/api/bookings', {
+    const res = await fetch('/api/bookings', {
       method: 'POST',
       headers: {'Content-Type':'application/json', 'Authorization':'Bearer ' + token},
       body: JSON.stringify(data)

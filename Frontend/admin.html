@@ -58,7 +58,7 @@ td::before{content:attr(data-label);font-weight:700;display:block;font-size:12px
 let allBookings = [];
 async function loadBookings(){
   try{
-    const res = await fetch('http://localhost:3000/api/bookings');
+    const res = await fetch('/api/bookings');
     allBookings = await res.json();
   }catch(e){ allBookings = []; }
   const filter = document.getElementById('filter').value;
@@ -95,7 +95,7 @@ function showReject(id){
 }
 function hideReject(id){ document.getElementById('box-'+id).style.display='none'; }
 async function approveBooking(id){
-  const res = await fetch('http://localhost:3000/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Approved'})});
+  const res = await fetch('/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Approved'})});
   const d = await res.json().catch(()=>({}));
   document.getElementById('msg').textContent = d.message||'Booking Approved';
   loadBookings();
@@ -103,14 +103,14 @@ async function approveBooking(id){
 async function confirmReject(id){
   const reason = document.getElementById('rejectionReason-'+id).value.trim();
   if(!reason){ alert('Please write the reason for rejection'); return; }
-  const res = await fetch('http://localhost:3000/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Rejected',reason})});
+  const res = await fetch('/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Rejected',reason})});
   const d = await res.json().catch(()=>({}));
   document.getElementById('msg').textContent = d.message||'Booking Rejected';
   loadBookings();
 }
 async function delBooking(id){
   if(!confirm('Delete this booking?')) return;
-  await fetch('http://localhost:3000/api/bookings/'+id,{method:'DELETE'});
+  await fetch('/api/bookings/'+id,{method:'DELETE'});
   loadBookings();
 }
 loadBookings();

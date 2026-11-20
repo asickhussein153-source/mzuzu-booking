@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const { sendMail } = require('./mailer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -76,7 +77,7 @@ app.post('/api/bookings', (req, res) => {
 res.json({ message: 'You have successfully submitted your request and it is pending approval. Please wait for confirmation from the Admin.' });
 });
 // ADMIN: approve / reject a booking
-app.put('/api/bookings/:id', (req, res) => {
+app.put('/api/bookings/:id', async (req, res) => {
   const id = parseInt(req.params.id);
   const { status, reason } = req.body;
   const booking = bookings.find(b => b.id === id);
@@ -86,8 +87,31 @@ app.put('/api/bookings/:id', (req, res) => {
     return res.status(400).json({ message: 'Please provide reason for rejection' });
   }
   booking.status = status;
+  if(status==='Approved') await sendMail(booking.email, 'Booking Approved - Mzuzu', 'Approved', booking);
+  if(status==='Rejected') await sendMail(booking.email, 'Booking Rejected - Mzuzu', 'Rejected', booking);
   booking.rejectionReason = status === 'Rejected' ? reason : '';
   res.json({ message: `Booking ${status}`, booking });
+});
+
+
+app.get('/api/my-bookings', (req,res)=>{
+  const email = req.headers['x-email'] || req.query.email;
+  if(!email) return res.json([]);
+  res.json(bookings.filter(b => b.email === email));
+});
+app.post('/api/bookings/:id/approve', async (req,res)=>{
+  const b = bookings.find(x => String(x.id) === String(req.params.id));
+  if(!b) return res.status(404).json({message:'Not found'});
+  b.status = 'Approved';
+  await sendMail(b.email, 'Booking Approved - Mzuzu', 'Hi '+b.name+', Your booking for '+(b.room||b.roomName||'room')+' is APPROVED.');
+  res.json({message:'Approved + email sent', booking: b});
+});
+app.post('/api/bookings/:id/reject', async (req,res)=>{
+  const b = bookings.find(x => String(x.id) === String(req.params.id));
+  if(!b) return res.status(404).json({message:'Not found'});
+  b.status = 'Rejected'; b.reason = req.body.reason || 'No reason given';
+  await sendMail(b.email, 'Booking Rejected - Mzuzu', 'Hi '+b.name+', Your booking for '+(b.room||b.roomName||'room')+' was REJECTED. Reason: '+b.reason);
+  res.json({message:'Rejected + email sent', booking: b});
 });
 
 app.listen(PORT, () => {

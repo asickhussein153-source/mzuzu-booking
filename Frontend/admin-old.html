@@ -90,7 +90,7 @@ let allBookings = [];
 let pendingRejectId = null; document.getElementById('reasonBox').style.display='none';
 
 async function loadBookings(){
-  const res = await fetch('http://localhost:3000/api/bookings');
+  const res = await fetch('/api/bookings');
   allBookings = await res.json();
   const filter = document.getElementById('filter').value;
   const filtered = filter==='All' || filter==='All Status' || filter==='' || filter==='all' ? allBookings : allBookings.filter(b=>b.status===filter);
@@ -140,7 +140,7 @@ async function respond(id, status) {
 
     try {
 
-        const res = await fetch(`http://localhost:3000/api/bookings/${id}`, {
+        const res = await fetch(`/api/bookings/${id}`, {
 
             method: 'PUT',
 
@@ -220,7 +220,7 @@ function cancelReject(){
 async function confirmReject(){
   const reason = document.getElementById('reasonText').value.trim();
   if(!reason){ alert('Please write reason for rejection'); return; }
-  const res = await fetch(`http://localhost:3000/api/bookings/${pendingRejectId}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Rejected',reason, rejectionReason:reason})});
+  const res = await fetch(`/api/bookings/${pendingRejectId}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Rejected',reason, rejectionReason:reason})});
   const d = await res.json();
   showMsg(d.message||'Rejected');
   document.getElementById('reasonBox').classList.remove('show');
@@ -247,7 +247,7 @@ function getActions(b){
 
 async function loadBookings(){
   try{
-    const res = await fetch('http://localhost:3000/api/bookings');
+    const res = await fetch('/api/bookings');
     allBookings = await res.json();
   }catch(e){
     showMsg('Failed to load bookings - is server running?');
@@ -270,7 +270,7 @@ async function loadBookings(){
 }
 
 async function respond(id, status){
-  const res = await fetch('http://localhost:3000/api/bookings/' + id + '', {
+  const res = await fetch('/api/bookings/' + id + '', {
     method: 'PUT',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ status })
@@ -292,7 +292,7 @@ function cancelReject(){
 async function confirmReject(){
   const reason = document.getElementById('reasonText').value.trim();
   if(!reason){ alert('Please write a reason'); return; }
-  const res = await fetch('http://localhost:3000/api/bookings/' + pendingRejectId + '/respond', {
+  const res = await fetch('/api/bookings/' + pendingRejectId + '/respond', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ status: 'Rejected', reason })

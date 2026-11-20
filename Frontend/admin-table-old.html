@@ -42,7 +42,7 @@ th,td{padding:12px;text-align:left;border-bottom:1px solid #eee}
 let allBookings = [];
 async function loadBookings(){
   try{
-    const res = await fetch('http://localhost:3000/api/bookings');
+    const res = await fetch('/api/bookings');
     allBookings = await res.json();
   }catch(e){ allBookings = []; }
   const filter = document.getElementById('filter').value;
@@ -63,7 +63,7 @@ async function loadBookings(){
 async function respond(id,status){
   let reason = '';
   if(status==='Rejected'){ reason = prompt('Reason for rejection?') || ''; }
-  const res = await fetch('http://localhost:3000/api/bookings/'+id,{
+  const res = await fetch('/api/bookings/'+id,{
     method:'PUT',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({status, reason})
