@@ -110,7 +110,7 @@ async function confirmReject(id){
 }
 async function delBooking(id){
   if(!confirm('Delete this booking?')) return;
-  await fetch('/api/bookings/'+id,{method:'DELETE'});
+  await fetch('/api/bookings/'+id,{method:'DELETE',headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
   loadBookings();
 }
 loadBookings();
