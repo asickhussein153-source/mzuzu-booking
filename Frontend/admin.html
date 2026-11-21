@@ -95,7 +95,7 @@ function showReject(id){
 }
 function hideReject(id){ document.getElementById('box-'+id).style.display='none'; }
 async function approveBooking(id){
-  const res = await fetch('/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:'Approved'})});
+  const res = await fetch('/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')},body:JSON.stringify({status:'Approved'})});
   const d = await res.json().catch(e=>alert(e));
   document.getElementById('msg').textContent = d.message||'Booking Approved';
   loadBookings();
