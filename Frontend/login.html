@@ -197,7 +197,7 @@ const password=document.getElementById('password').value;
 const res=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
 const data=await res.json();
 if(!res.ok) alert(data.message);
-if(res.ok){localStorage.setItem('token',data.token);localStorage.setItem('role',data.role);localStorage.setItem('email',data.email);localStorage.setItem('name',data.name);window.location.href=(data.role==='admin' ? 'admin.html' : 'dashboard.html');}
+if(res.ok){localStorage.setItem('token',data.token);localStorage.setItem('role',data.role);localStorage.setItem('email',data.email);localStorage.setItem('name',data.name) window.location.href = ((data.role === 'admin' || (data.user && data.user.role === 'admin') || email === 'admin@mzuzu.ac.mw') ? 'admin.html' : 'dashboard.html') ;}
 </script>
 </body>
 </html>
