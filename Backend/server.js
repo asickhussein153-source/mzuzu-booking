@@ -20,6 +20,11 @@ app.get('/', (req, res) => {
 });
 
 let users = [];
+(async () => {
+  const h = await bcrypt.hash('Admin123', 10);
+  users.push({ name: 'Admin', email: 'admin@mzuzu.ac.mw', password: h });
+  console.log('Seeded admin user');
+})();
 let bookings = [];
 
 let rooms = [
