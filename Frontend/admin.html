@@ -95,18 +95,24 @@ function showReject(id){
 }
 function hideReject(id){ document.getElementById('box-'+id).style.display='none'; }
 async function approveBooking(id){
-  const res = await fetch('/api/bookings/'+id,{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')},body:JSON.stringify({status:'Approved'})});
-  const d = await res.json().catch(e=>alert(e));
-  document.getElementById('msg').textContent = d.message||'Booking Approved';
-  loadBookings();
+  try{
+    const res = await fetch('/api/bookings/'+id+'/approve',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')}});
+    const d = await res.json().catch(()=>({}));
+    if(!res.ok){ document.getElementById('msg').textContent = d.message || ('Approve failed: '+res.status); return; }
+    document.getElementById('msg').textContent = d.message || 'Booking approved';
+    loadBookings();
+  }catch(e){ alert('Network error - is backend running?'); }
 }
 async function confirmReject(id){
-  const reason = document.getElementById('rejectionReason-'+id).value.trim();
+  const reason = document.getElementById('rejectionReason-'+id).value;
   if(!reason){ alert('Please write the reason for rejection'); return; }
-  const res = await fetch('/api/bookings/'+id,{method:'PUT',  headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')},body:JSON.stringify({status:'Rejected',reason})});
-  const d = await res.json().catch(e=>alert(e));
-  document.getElementById('msg').textContent = d.message||'Booking Rejected';
-  loadBookings();
+  try{
+    const res = await fetch('/api/bookings/'+id+'/reject',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')},body:JSON.stringify({reason})});
+    const d = await res.json().catch(()=>({}));
+    if(!res.ok){ document.getElementById('msg').textContent = d.message || ('Reject failed: '+res.status); return; }
+    document.getElementById('msg').textContent = d.message || 'Booking rejected';
+    loadBookings();
+  }catch(e){ alert('Network error - is backend running?'); }
 }
 async function delBooking(id){
   if(!confirm('Delete this booking?')) return;
