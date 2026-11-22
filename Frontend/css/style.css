@@ -446,3 +446,21 @@ Url("Mzuzu/Frontend/images/mzuni.jpg");
     font-size: 15px;
     opacity: 0.9;
 }
+
+/* RESPONSIVE FIX V3 - ALL DEVICES */
+* { box-sizing: border-box !important; }
+html, body { overflow-x: hidden !important; width: 100% !important; }
+.university-header { flex-wrap: wrap !important; padding: 12px 4% !important; }
+.university-header img.university-logo { width: clamp(52px, 14vw, 90px) !important; height: auto !important; }
+.university-info h2 { font-size: clamp(17px, 5vw, 25px) !important; }
+.university-info p { font-size: clamp(12px, 3.5vw, 14px) !important; }
+.university-image { height: clamp(200px, 50vw, 450px) !important; }
+.university-image img { height: 100% !important; }
+.university-header .nav-links { flex-wrap: wrap !important; gap: 8px !important; }
+.university-header .nav-links a { padding: 8px 12px !important; font-size: 14px !important; }
+form { width: min(520px, 100%) !important; padding: 18px 14px !important; }
+table { display: block !important; width: 100% !important; overflow-x: auto !important; }
+@media (max-width: 480px) {
+  .university-header { flex-direction: column !important; text-align: center !important; }
+  .university-brand { flex-direction: column !important; align-items: center !important; text-align: center !important; }
+}
