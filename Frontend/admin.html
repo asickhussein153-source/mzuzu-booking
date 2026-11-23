@@ -47,6 +47,7 @@ td::before{content:attr(data-label);font-weight:700;display:block;font-size:12px
 <option>Approved</option>
 <option>Rejected</option>
 </select>
+<input id="search" placeholder="Search student / room..." oninput="loadBookings()" style="width:100%;padding:10px;margin-top:10px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box">
 </div>
 <p id="empty" style="display:none">No bookings found.</p>
 <table>
@@ -58,11 +59,13 @@ td::before{content:attr(data-label);font-weight:700;display:block;font-size:12px
 let allBookings = [];
 async function loadBookings(){
   try{
-    const res = await fetch('/api/bookings');
+    const res = await fetch('https://mzuzu-booking-1.onrender.com/api/bookings');
     allBookings = await res.json();
   }catch(e){ allBookings = []; }
   const filter = document.getElementById('filter').value;
-  const filtered = (filter==='All Status'||filter==='All'||filter==='') ? allBookings : allBookings.filter(b=>b.status===filter);
+  const q = (document.getElementById('search')?.value || '').toLowerCase();
+    let filtered = (filter==='All Status'||filter==='All'||filter==='') ? allBookings : allBookings.filter(b=>b.status===filter);
+    if(q) filtered = filtered.filter(b => JSON.stringify(b).toLowerCase().includes(q));
   document.getElementById('empty').style.display = filtered.length ? 'none':'block';
   document.getElementById('list').innerHTML = filtered.map(b=>{
     const id = b._id||b.id;
@@ -96,7 +99,7 @@ function showReject(id){
 function hideReject(id){ document.getElementById('box-'+id).style.display='none'; }
 async function approveBooking(id){
   try{
-    const res = await fetch('/api/bookings/'+id+'/approve',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')}});
+    const res = await fetch('https://mzuzu-booking-1.onrender.com/api/bookings/'+id+'/approve',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')}});
     const d = await res.json().catch(()=>({}));
     if(!res.ok){ document.getElementById('msg').textContent = d.message || ('Approve failed: '+res.status); return; }
     document.getElementById('msg').textContent = d.message || 'Booking approved';
@@ -107,7 +110,7 @@ async function confirmReject(id){
   const reason = document.getElementById('rejectionReason-'+id).value;
   if(!reason){ alert('Please write the reason for rejection'); return; }
   try{
-    const res = await fetch('/api/bookings/'+id+'/reject',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')},body:JSON.stringify({reason})});
+    const res = await fetch('https://mzuzu-booking-1.onrender.com/api/bookings/'+id+'/reject',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')},body:JSON.stringify({reason})});
     const d = await res.json().catch(()=>({}));
     if(!res.ok){ document.getElementById('msg').textContent = d.message || ('Reject failed: '+res.status); return; }
     document.getElementById('msg').textContent = d.message || 'Booking rejected';
@@ -116,7 +119,7 @@ async function confirmReject(id){
 }
 async function delBooking(id){
   if(!confirm('Delete this booking?')) return;
-  await fetch('/api/bookings/'+id,{method:'DELETE',headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
+  await fetch('https://mzuzu-booking-1.onrender.com/api/bookings/'+id,{method:'DELETE',headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
   loadBookings();
 }
 loadBookings();
