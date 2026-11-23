@@ -3,20 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
     <title>Mzuzu University Room Booking</title>
 
     <link rel="stylesheet" 
       href="css/style.css">
 
-</head>
+<style>
+/* HOME NAV ONLY - PILLS LIKE SCREENSHOT */
+.home-nav { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 12px 12px !important; width: 100% !important; padding: 0 !important; background: transparent !important; box-shadow: none !important; border: none !important; }
+.home-nav a { flex: 0 0 auto !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; height: 44px !important; width: auto !important; max-width: none !important; aspect-ratio: auto !important; background: #fff !important; color: #0a4d2e !important; text-decoration: none !important; font-weight: 700 !important; white-space: nowrap !important; padding: 0 20px !important; font-size: 15px !important; border-radius: 999px !important; box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important; border: none !important; }
+</style></head>
 
 <body>
 
 
-<header class="university-header">
+<header class="university-header" style="background: linear-gradient(rgba(0,128,0,0.45), rgba(0,100,0,0.45)), url(../images/header-bg.jpg); background-size: cover; background-position: center; min-height: 380px;">
 
     <div class="university-brand">
 
@@ -31,12 +34,11 @@
 
     </div>
 
-    <nav class="navbar">
+    <nav class="home-nav" class="navbar">
 
         <div class="nav-links">
             <a href="home.html">Home</a>
-            <a href="rooms.html">Rooms</a>
-            <a href="login.html">Login</a><a href="my-bookings.html" style="display:inline-block;background:#0b3d66;color:#fff;padding:10px 18px;border-radius:20px;margin:5px;text-decoration:none">📋 My Bookings</a>
+            <a href="rooms.html">Rooms</a><a href="login.html">Login</a></a><a href="my-bookings.html" style="display:inline-block;background:#0b3d66;color:#fff;padding:10px 18px;border-radius:20px;margin:5px;text-decoration:none">📋 My Bookings</a>
             <a href="register.html">Register</a>
         </div>
 
@@ -47,8 +49,7 @@
   
     <section class="university-image">
 
-    <img src="images/mzuni.jpg"
-         alt="Mzuzu University Campus">
+    <div class="mzuni-wrap"><img src="images/mzuni.jpg" alt="MZUNI Campus"></div>
 
 </section>
 

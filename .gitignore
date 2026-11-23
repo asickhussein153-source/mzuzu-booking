@@ -1,4 +1,7 @@
 node_modules/
+users.json
 .env
-Backend/server.log
-node_modules/
+nohup.out
+*.bak
+*.backup*
+fix*.js

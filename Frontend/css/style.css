@@ -7,10 +7,10 @@ header p { font-size:14px; opacity:0.85; }
 nav { background:white; padding:14px 20px; display:flex; gap:24px; box-shadow:0 2px 8px rgba(0,0,0,0.08); position:sticky; top:0; }
 nav a { color:#0b4d2e; text-decoration:none; font-weight:700; font-size:15px; }
 nav a:hover { color:#eab308; }
-main, section { max-width:900px; margin:24px auto; padding:0 16px; }
+main, section { max-width: 100%; max-width: 900px; margin:24px auto; padding:0 16px; }
 h1 { font-size:28px; margin:18px 0 8px; color:#0b4d2e; }
 p { margin-bottom:14px; color:#444; }
-form { background:white; padding:28px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); max-width:520px; margin:20px auto; }
+form { background:white; padding:28px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); max-width: 100%; max-width: 520px; margin:20px auto; }
 label { display:block; font-weight:600; margin:14px 0 6px; font-size:14px; }
 input, select, textarea { width:100%; padding:12px; border:1.5px solid #ddd; border-radius:8px; font-size:15px; outline:none; }
 input:focus { border-color:#0b4d2e; }
@@ -37,7 +37,7 @@ main { padding-top:20px !important; }
 ===================================== */
 
 header.university-header {
-    background: #ffffff !important;
+    background: linear-gradient(rgba(0,100,0,0.65), rgba(0,100,0,0.65)), url(../images/header-bg.jpg) !important; background-size: cover !important; background-position: center !important;
     color: #222 !important;
     padding: 18px 4% !important;
     display: flex;
@@ -94,7 +94,7 @@ header.university-header {
 }
 
 .university-header .nav-links a {
-    background: #edf5ef !important;
+    background: linear-gradient(rgba(0,128,0,0.45), rgba(0,100,0,0.45)), url(../images/header-bg.jpg) !important; background-size: cover !important; background-position: center !important;
     color: darkgreen !important;
     padding: 12px 21px;
     border-radius: 50px;
@@ -153,7 +153,7 @@ header.university-header {
 /* 1. DARK GREEN UNIVERSITY HEADER */
 
 body header.university-header {
-    background: #07552d !important;
+    background: linear-gradient(rgba(0,128,0,0.45), rgba(0,100,0,0.45)), url(../images/header-bg.jpg) !important; background-size: cover !important; background-position: center !important;
     color: white !important;
     padding: 22px 4% !important;
     border-bottom: 5px solid #d4a72c;
@@ -208,7 +208,7 @@ body header.university-header {
 }
 
 .university-header .nav-links a:hover {
-    background: #d4a72c !important;
+    background: linear-gradient(rgba(0,128,0,0.45), rgba(0,100,0,0.45)), url(../images/header-bg.jpg) !important; background-size: cover !important; background-position: center !important;
     color: #073c23 !important;
 }
 
@@ -248,7 +248,7 @@ body .hero h1 {
 /* 5. PROFESSIONAL FOOTER */
 
 body footer {
-    background: #07552d !important;
+    background: linear-gradient(rgba(0,128,0,0.45), rgba(0,100,0,0.45)), url(../images/header-bg.jpg) !important; background-size: cover !important; background-position: center !important;
     color: white !important;
     text-align: center;
     padding: 35px 15px !important;
@@ -326,17 +326,9 @@ body footer span {
     display: block;
     border-radius: 0;
     
-    -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 65%,
-        transparent 100%
-    );
+    
 
-    mask-image: linear-gradient(
-        to bottom,
-        black 65%,
-        transparent 100%
-    );
+    
 }
 
 /* Remove the gap around the image */
@@ -363,7 +355,7 @@ body footer span {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
-    max-width: 1100px;
+    max-width: 100%; max-width: 1100px;
     margin: auto;
 }
 
@@ -463,4 +455,155 @@ table { display: block !important; width: 100% !important; overflow-x: auto !imp
 @media (max-width: 480px) {
   .university-header { flex-direction: column !important; text-align: center !important; }
   .university-brand { flex-direction: column !important; align-items: center !important; text-align: center !important; }
+}
+
+/* --- FINAL LOCKED DESIGN - LIKE YOUR SCREENSHOT --- */
+/* 1. HEADER - Tall green, gate photo behind, NOT removed */
+header {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 380px !important;
+  height: auto !important;
+  padding: 30px 15px 30px 15px !important;
+  margin: 0 !important;
+  text-align: center !important;
+  color: white !important;
+  background-image: linear-gradient(rgba(0,100,0,0.75), rgba(0,100,0,0.75)), url('../images/header.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+header img {
+  width: 90px !important;
+  height: auto !important;
+  margin: 0 auto 10px auto !important;
+  display: block !important;
+}
+header h1 { font-size: 28px !important; color: white !important; margin: 5px 0 !important; }
+header p { font-size: 16px !important; color: white !important; opacity: 0.9 !important; }
+
+/* Buttons - white pills like screenshot */
+header a, header button, nav a {
+  background: white !important;
+  color: #006400 !important;
+  border-radius: 999px !important;
+  padding: 10px 22px !important;
+  margin: 5px !important;
+  display: inline-block !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+}
+
+/* 2. MZUNI.JPG - FULL, NO ZOOM, NO GAP, DIRECTLY UNDER HEADER */
+img[src*="mzuni.jpg"] {  
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  /* Soft fade at bottom into white like screenshot */
+  
+  
+}
+/* No white gap between header and mzuni */
+header + * { margin-top: 0 !important; padding-top: 0 !important; }
+
+/* HEADER BACKGROUND = header-bg.jpg - FINAL */
+header {
+  background-image: linear-gradient(rgba(0,120,40,0.72), rgba(0,120,40,0.72)), url('../images/header-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  min-height: 380px !important;
+  color: white !important;
+}
+header {
+  background-image: linear-gradient(rgba(0,100,0,0.65), rgba(0,100,0,0.65)), url('../images/header-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 380px;
+  color: white;
+}
+
+/* FORCE FADE */
+img[src*="mzuni.jpg"] {
+  
+  
+}
+
+/* WHITE FADE OVERLAY - ALWAYS WORKS */
+.mzuni-wrap {
+  position: relative;
+  display: block;
+  line-height: 0;
+  overflow: hidden;
+}
+.mzuni-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  
+  
+}
+
+
+/* FADE OUTSIDE IMAGE - IMAGE STAYS SHARP */
+.mzuni-wrap {
+  position: relative;
+  display: block;
+  line-height: 0;
+  overflow: visible;
+  background: white;
+  /* white glow outside */
+  box-shadow: 0 0 60px 45px white, 0 0 100px 80px rgba(255,255,255,0.9);
+  border-radius: 12px;
+}
+.mzuni-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* RESPONSIVE WORLD - FITS EVERY DEVICE */
+* { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; overflow-x: hidden; width: 100%; }
+img, video { max-width: 100%; height: auto; display: block; }
+.university-header { width: 100%; min-height: 280px; padding: 20px 16px; background-size: cover; background-position: center; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.university-header h1 { font-size: clamp(1.5rem, 5vw, 3rem); line-height: 1.2; word-wrap: break-word; }
+.university-header p { font-size: clamp(0.9rem, 3vw, 1.2rem); }
+.container, .main-content, .content, main { width: 100%; max-width: 100%; max-width: 1200px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+.mzuni-wrap { width: 100%; max-width: 100%; }
+.mzuni-wrap img { width: 100%; height: auto; object-fit: cover; }
+/* Grids stack on phone */
+.grid, .cards, .features, .row { display: grid; gap: 16px; }
+/* PHONE - up to 600px */
+@media (max-width: 600px) {
+  .grid, .cards, .features, .row { grid-template-columns: 1fr; }
+  
+nav a, .navbar a, .nav-links a {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  width: auto !important;
+}
+
+
+
+nav a, .navbar a, .nav-links a, nav button, .navbar button {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  width: auto !important;
+  flex-shrink: 1 !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  padding: 8px 4px !important;
+  font-size: clamp(12px, 3.5vw, 15px) !important;
+  border-radius: 999px !important;
 }

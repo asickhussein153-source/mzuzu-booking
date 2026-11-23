@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
     <title>Student Login | Mzuzu University</title>
 
@@ -43,27 +43,19 @@
 
             <p>Login to access the room booking system.</p>
 
-            <form action="#" method="POST">
+            <form id="loginForm">
 
                 <label for="studentID">
                     Email
                 </label>
 
-                <input type="email"
-                       id="email"
-                       name="email"
-                       placeholder="Enter your email"
-                       required>
+                <input type="email" id="email" name="email" required>
 
                 <label for="password">
                     Password
                 </label>
 
-                <input type="password"
-                       id="password"
-                       name="password"
-                       placeholder="Enter your password"
-                       required>
+                <input type="password" id="password" name="password" required>
 
                 <button type="submit">
                     Login
