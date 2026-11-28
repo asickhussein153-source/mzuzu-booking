@@ -37,7 +37,7 @@ button{width:100%;padding:12px;border:0;border-radius:20px;background:#0b3d66;co
 async function check(){
   const q = document.getElementById('search').value.trim().toLowerCase();
   if(!q){ alert('Please enter your email or phone'); return; }
-  const res = await fetch('http://localhost:3000/api/bookings', {headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
+  const res = await fetch('https://mzuzu-booking-2.onrender.com/api/bookings', {headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
   const all = await res.json();
   const mine = all.filter(b => (b.email||'').toLowerCase()===q || (b.phone||'')===q || (b.fullName||'').toLowerCase()===q);
   if(!mine.length){ document.getElementById('list').innerHTML='<div class="box">No booking found for this email/phone.</div>'; return; }

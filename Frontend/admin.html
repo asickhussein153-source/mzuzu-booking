@@ -59,7 +59,7 @@ td::before{content:attr(data-label);font-weight:700;display:block;font-size:12px
 let allBookings = [];
 async function loadBookings(){
   try{
-    const res = await fetch('http://localhost:3000/api/bookings', {headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
+    const res = await fetch('https://mzuzu-booking-2.onrender.com/api/bookings', {headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
     allBookings = await res.json();
   }catch(e){ allBookings = []; }
   const filter = document.getElementById('filter').value;
@@ -99,7 +99,7 @@ function showReject(id){
 function hideReject(id){ document.getElementById('box-'+id).style.display='none'; }
 async function approveBooking(id){
   try{
-    const res = await fetch('http://localhost:3000/api/bookings/'+id+'/approve',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')}});
+    const res = await fetch('https://mzuzu-booking-2.onrender.com/api/bookings/'+id+'/approve',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')}});
     const d = await res.json().catch(()=>({}));
     if(!res.ok){ document.getElementById('msg').textContent = d.message || ('Approve failed: '+res.status); return; }
     document.getElementById('msg').textContent = d.message || 'Booking approved';
@@ -110,7 +110,7 @@ async function confirmReject(id){
   const reason = document.getElementById('rejectionReason-'+id).value;
   if(!reason){ alert('Please write the reason for rejection'); return; }
   try{
-    const res = await fetch('http://localhost:3000/api/bookings/'+id+'/reject',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')},body:JSON.stringify({reason})});
+    const res = await fetch('https://mzuzu-booking-2.onrender.com/api/bookings/'+id+'/reject',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('token')},body:JSON.stringify({reason})});
     const d = await res.json().catch(()=>({}));
     if(!res.ok){ document.getElementById('msg').textContent = d.message || ('Reject failed: '+res.status); return; }
     document.getElementById('msg').textContent = d.message || 'Booking rejected';
@@ -119,7 +119,7 @@ async function confirmReject(id){
 }
 async function delBooking(id){
   if(!confirm('Delete this booking?')) return;
-  await fetch('http://localhost:3000/api/bookings/'+id,{method:'DELETE',headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
+  await fetch('https://mzuzu-booking-2.onrender.com/api/bookings/'+id,{method:'DELETE',headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
   loadBookings();
 }
 loadBookings();
