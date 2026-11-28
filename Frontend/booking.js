@@ -27,7 +27,7 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
     total: 0
   };
   console.log('SENDING:', data);
-  const res = await fetch('https://mzuzu-booking-2.onrender.com/api/bookings', {
+  const res = await fetch('https://mzuzu-backend.onrender.com/api/bookings', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify(data)

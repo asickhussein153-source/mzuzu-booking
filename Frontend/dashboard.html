@@ -38,7 +38,7 @@ let allBookings = [];
 
 async function loadBookings(){
   try{
-    const res = await fetch('https://mzuzu-booking-2.onrender.com/api/bookings', {
+    const res = await fetch('https://mzuzu-backend.onrender.com/api/bookings', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();
