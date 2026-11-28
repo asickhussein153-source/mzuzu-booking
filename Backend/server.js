@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 // --- MongoDB Connect ---
-mongoose.connect('mongodb+srv://asickhussein153_db_user:0990asick@cluster0.ylcofkn.mongodb.net/mzuzu?retryWrites=true&w=majority')
-  .then(()=> console.log('MongoDB connected'))
+mongoose.connect(process.env.MONGO_URI)
+.then(()=> console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB error:', err.message));
 
 // --- Models ---
