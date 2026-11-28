@@ -19,7 +19,7 @@ button{width:100%;padding:12px;border:0;border-radius:20px;background:#0b3d66;co
 .reason{background:#fef2f2;border-left:4px solid #dc2626;padding:10px;border-radius:8px;margin-top:10px}
 .approved-box{background:#f0fdf4;border-left:4px solid #16a34a;padding:10px;border-radius:8px;margin-top:10px}
 </style>
-</head>
+<style>footer{background:#14532d;background-image:none;color:white} footer a{color:#d1fae5} footer p,footer h3,footer h4{color:white}</style></head>
 <body>
 <div class="card">
 <h2 style="margin:0">📋 My Bookings</h2>
@@ -37,7 +37,7 @@ button{width:100%;padding:12px;border:0;border-radius:20px;background:#0b3d66;co
 async function check(){
   const q = document.getElementById('search').value.trim().toLowerCase();
   if(!q){ alert('Please enter your email or phone'); return; }
-  const res = await fetch('/api/bookings');
+  const res = await fetch('http://localhost:3000/api/bookings', {headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
   const all = await res.json();
   const mine = all.filter(b => (b.email||'').toLowerCase()===q || (b.phone||'')===q || (b.fullName||'').toLowerCase()===q);
   if(!mine.length){ document.getElementById('list').innerHTML='<div class="box">No booking found for this email/phone.</div>'; return; }

@@ -1,7 +1,7 @@
+*.log
 node_modules/
-users.json
+*.old
 .env
-nohup.out
+users.json
+fix-*.js
 *.bak
-*.backup*
-fix*.js

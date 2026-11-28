@@ -9,7 +9,7 @@
     <title>Available Rooms | Mzuzu University</title>
 
     <link rel="stylesheet" href="css/style.css">
-</head>
+<style>footer{background:#14532d;background-image:none;color:white} footer a{color:#d1fae5} footer p,footer h3,footer h4{color:white}</style></head>
 
 <body>
 
@@ -189,5 +189,16 @@
         </p>
     </footer>
 
-</body>
+<script>
+document.querySelectorAll('a,button').forEach(btn=>{
+  if(/book/i.test(btn.textContent)){
+    btn.addEventListener('click',e=>{
+      e.preventDefault();
+      let card=btn.closest('div')||document;
+      let title=(card.querySelector('h1,h2,h3,h4')||{}).textContent||'Room';
+      location.href='booking.html?room='+encodeURIComponent(title.trim());
+    });
+  }
+});
+</script></body>
 </html>

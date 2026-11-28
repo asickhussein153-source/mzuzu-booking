@@ -247,14 +247,7 @@ body .hero h1 {
 
 /* 5. PROFESSIONAL FOOTER */
 
-body footer {
-    background: linear-gradient(rgba(0,128,0,0.45), rgba(0,100,0,0.45)), url(../images/header-bg.jpg) !important; background-size: cover !important; background-position: center !important;
-    color: white !important;
-    text-align: center;
-    padding: 35px 15px !important;
-    margin-top: 45px;
-    min-height: 110px;
-}
+body footer { background: #14532d !important; background-image: none !important; color: white !important; text-align: center; padding: 35px 15px !important; margin-top: 45px; min-height: 110px; }
 
 body footer p,
 body footer span {

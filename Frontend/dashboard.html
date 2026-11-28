@@ -11,7 +11,7 @@ button{background:#d32f2f;color:white;border:none;padding:12px 20px;border-radiu
 input{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;margin:10px 0;box-sizing:border-box}
 .booking{background:#f9f9f9;padding:12px;border-radius:8px;margin:8px 0;border-left:4px solid #1a73e8}
 </style>
-</head>
+<style>footer{background:#14532d;background-image:none;color:white} footer a{color:#d1fae5} footer p,footer h3,footer h4{color:white}</style></head>
 <body><script>if(!localStorage.getItem("token")){alert("Please login first");window.location.href="login.html";}</script>
 <div class="card">
 <h1>Welcome 👋</h1>
@@ -38,7 +38,7 @@ let allBookings = [];
 
 async function loadBookings(){
   try{
-    const res = await fetch('https://mzuzu-booking-1.onrender.com/api/bookings', {
+    const res = await fetch('http://localhost:3000/api/bookings', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();

@@ -8,7 +8,7 @@
     <title>Student Login | Mzuzu University</title>
 
     <link rel="stylesheet" href="css/style.css">
-</head>
+<style>footer{background:#14532d;background-image:none;color:white} footer a{color:#d1fae5} footer p,footer h3,footer h4{color:white}</style></head>
 
 <body>
 
@@ -82,14 +82,57 @@
     </footer>
 
 <script>
-document.querySelector('form').addEventListener('submit', async (e)=>{
-e.preventDefault();
-const email=document.getElementById('email').value;
-const password=document.getElementById('password').value;
-const res=await fetch('https://mzuzu-booking-1.onrender.com/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
-const data=await res.json();
-if(!res.ok) alert(data.message);
-if(res.ok){localStorage.setItem('token',data.token);localStorage.setItem('role',data.role);localStorage.setItem('email',data.email);localStorage.setItem('name',data.name); window.location.href = ((data.role === 'admin' || (data.user && data.user.role === 'admin') || email === 'admin@mzuzu.ac.mw') ? 'admin.html' : 'dashboard.html') ;}
+const loginForm = document.querySelector('form');
+
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+        alert('Please enter your email and password.');
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            alert(data.message || 'Login failed.');
+            return;
+        }
+
+        // Save information returned by Express
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('name', data.name);
+        localStorage.setItem('email', data.email);
+        localStorage.setItem('role', data.role);
+
+        // Redirect according to account role
+        if (data.role === 'admin') {
+            window.location.href = '/admin.html';
+        } else if (data.role === 'student' || data.role === 'user') {
+            window.location.href = '/dashboard.html';
+        } else {
+            alert('Unknown user role: ' + data.role);
+        }
+
+    } catch (error) {
+        console.error('Login error:', error);
+        alert('Server connection failed. Please try again.');
+    }
 });
 </script>
 </body>
